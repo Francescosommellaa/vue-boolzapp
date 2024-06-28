@@ -5,17 +5,44 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+/* bg */
 body {
     background-color: #DCDBD4;
     width: 100vw;
     height: 100vh;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #green-banner {
     background-color: #029688;
     height: 20vh;
-    width: 100vh;
+    width: 100vw;
     position: absolute;
     top: 0;
+    z-index: -1;
+}
+
+/* container app */
+.container {
+    background-color: #fff;
+    width: 84%;
+    height: 80%;
+    margin: 0 auto;
+    display: flex;
+}
+
+/* parte sinistra app */
+.left-c {
+    width: 40%;
+    height: 100%;
+    border-right: 1px solid #DADADA;
+}
+
+/* parte destra app */
+.right-c {
+    width: 60%;
+    height: 100%;
 }
