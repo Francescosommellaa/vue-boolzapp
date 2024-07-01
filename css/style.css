@@ -39,6 +39,7 @@ body {
     width: 40%;
     height: 100%;
     border-right: 1px solid #DADADA;
+    overflow: hidden;
 }
 
     /* parte sinistra zona immutabile */
@@ -72,4 +73,79 @@ body {
 .right-c {
     width: 60%;
     height: 100%;
+}
+
+/* contatti */
+
+.input-container {
+    width: 80%;
+    margin: 0 auto;
+    height: 30px;
+}
+.search-input {
+    width: 100%;
+    box-shadow: none;
+    border: none;
+    border-bottom: 1px solid gray;
+    cursor: pointer;
+    padding: 0.4em;
+}
+.search-input:active {
+    border-bottom: 1px solid black;
+}
+
+.chat-c {
+    width: 100%;
+    height: calc(100% - 50px);
+    overflow: auto;
+    padding: 0 0 2.5em 0 ;
+}
+
+.last-message {
+    color: gray;
+}
+
+.container-contact {
+    display: flex;
+    align-items: center;
+    padding: 0.5em;
+    gap: 20px;
+    margin: 0.8em 0.5em;
+}
+
+.container-contact:hover {
+    background-color: rgba(255, 255, 255, 0.5)BEB;
+}
+
+.active-chat {
+    background-color: #E8EBEB;
+}
+
+/* messaggi */
+.chat {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.message.sent {
+    text-align: right;
+    background-color: green;
+    color: white;
+    padding: 1em;
+    margin: 0.5em;
+    border-radius: 12px;
+    max-width: 50%;
+    align-self: end;
+}
+  
+.message.received {
+    text-align: left;
+    background-color: rgb(90, 90, 90);
+    color: white;
+    padding: 1em;
+    margin: 0.5em;
+    border-radius: 12px;
+    max-width: 50%;
+    align-self: flex-start;
 }

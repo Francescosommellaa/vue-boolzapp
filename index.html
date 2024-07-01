@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BoolZapp</title>
 
     <!-- fontawesome -->
@@ -46,11 +44,21 @@
             </div>
 
             <div class="chat-c">
-                <input v-model="searchQuery" placeholder="Cerca">
 
-                <div v-for="contact in contacts" :key="contact.name">
-                    <img :src="contact.avatar" alt="Avatar">
-                    <h4>{{ contact.name }}</h4>
+                <div class="input-container">
+                    <!-- input per la ricerca -->
+                    <input class="search-input" v-model="searchQuery" placeholder="Cerca">
+                </div>
+
+                <!-- Contatti -->
+                <div v-for="contact in contacts" :key="contact.name"@click="setActiveContact(contact)" :class="{ 'active-chat': contact === activeContact }">
+                    <div class="container-contact">
+                        <img class="cerchio" :src="contact.avatar" alt="Avatar">
+                        <div>
+                            <h4>{{ contact.name }}</h4>
+                            <p class="last-message">{{getPreviewMessage(contact)}}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -58,14 +66,17 @@
         <!-- parte destra container  -->
         <div class="right-c">
             <div class="user-chat">
-
+                <!--Profilo Chat attiva  -->
             </div>
-            <div class="chat">
-                <div v-for="message in activeContact.messages" :key="message.date" :class="message.status">
+
+            <!-- chat -->
+            <div class="chat" v-if="activeContact != null">
+                <div v-for="message in activeContact.messages" :key="message.date" :class="['message', message.status]">
                     <p>{{ message.message }}</p>
                 </div>
             </div>
-            <div class="text-c">
+            <div class="text-c" v-if="activeContact != null">
+                <!-- input per i messaggi -->
                 <input v-model="newMessage" @keyup.enter="sendMessage">
             </div>
         </div>
