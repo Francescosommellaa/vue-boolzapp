@@ -170,34 +170,39 @@ const app = createApp({
                         }
                     ],
                 }
-            ]
+            ],
+            searchQuery: '',
+            activeContact: null,
         };
     },
 
     // Definisce i metodi dell'applicazione
     methods: {
-
         // Metodo per inviare un messaggio
         sendMessage() {
-
-            // Aggiunge un nuovo messaggio all'array di messaggi del contatto attivo
-            this.activeContact.messages.push({
-                date: new Date().toISOString(),// Imposta la data e l'ora
-                message: this.newMessage,// Usa il testo del nuovo messaggio
-                status: 'sent' // Imposta lo stato del messaggio come "inviato"
-            });
-
-            // Azzera il testo del nuovo messaggio
-            this.newMessage = '';
-
-            // Dopo 1 secondo, aggiunge un messaggio di risposta all'array di messaggi del contatto attivo
-            setTimeout(() => {
-              this.activeContact.messages.push({
-                date: new Date().toISOString(),// Imposta la data e l'ora
-                message: 'Ok',
-                status: 'received'
-              });
-            }, 1000);
+            if (this.activeContact) {
+                this.activeContact.messages.push({
+                    date: new Date().toISOString(), // Imposta la data e l'ora attuali
+                    message: this.newMessage, // Usa il testo del nuovo messaggio
+                    status: 'sent' // Imposta lo stato del messaggio come "inviato"
+                });
+                this.newMessage = '';
+                setTimeout(() => {
+                  this.activeContact.messages.push({
+                    date: new Date().toISOString(), // Imposta la data e l'ora attuali
+                    message: 'Ok', // Imposta il testo del messaggio di risposta
+                    status: 'received' // Imposta lo stato del messaggio come "ricevuto"
+                  });
+                }, 1000);
+            }
+        }
+    },
+    // Definisce le proprietà calcolate dell'applicazione
+    computed: {
+        // Proprietà calcolata per ottenere i contatti filtrati in base alla query di ricerca
+        filteredContacts() {
+            // Filtra l'array di contatti per includere solo quelli il cui nome contiene la query di ricerca
+            return this.contacts.filter(contact => contact.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
         }
     }
 }); app.mount('#app');
