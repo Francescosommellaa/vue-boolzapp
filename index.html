@@ -71,10 +71,18 @@
 
             <!-- chat -->
             <div class="chat" v-if="activeContact != null">
-                <div v-for="message in activeContact.messages" :key="message.date" :class="['message', message.status]">
+                <div v-for="(message, index) in activeContact.messages" :key="message.date" :class="['message', message.status]" @click="openContextMenu($event, index)" ref="messages">
                     <p>{{ message.message }}</p>
+                    <div class="context-menu" :class="{ active: contextMenuIndex === index }" :style="{ top: contextMenuY + 'px', left: contextMenuX + 'px' }">
+                      <ul>
+                        <li @click="showInfo(index)">Info</li>
+                        <li @click="deleteMessage(index)">Cancella</li>
+                      </ul>
+                    </div>
                 </div>
             </div>
+
+
             <div class="text-c" v-if="activeContact != null">
                 <!-- input per i messaggi -->
                 <input v-model="newMessage" @keyup.enter="sendMessage">

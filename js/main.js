@@ -173,7 +173,10 @@ const app = createApp({
             ],
             searchQuery: '',
             activeContact: null,
-            previewMessage: null
+            previewMessage: null,
+            contextMenuX: 0,
+            contextMenuY: 0,
+            contextMenuIndex: null,
         };
     },
 
@@ -204,13 +207,39 @@ const app = createApp({
             }
         },
 
+        // Metodo per ottenere l'anteprima del messaggio
         getPreviewMessage(contact) {
+            // Controlla se il contatto ha dei messaggi
             if (contact.messages.length > 0) {
-              const lastMessage = contact.messages[contact.messages.length - 1].message;
-              return lastMessage.length > 30 ? lastMessage.slice(0, 30) + '...' : lastMessage;
-            }
-            return '';
-          }
+                
+                // Ottiene l'ultimo messaggio del contatto
+                const lastMessage = contact.messages[contact.messages.length - 1].message;
+                
+                // Se la lunghezza del messaggio è superiore a 30 caratteri, ritorna i primi 30 caratteri seguiti da '...'
+                // Altrimenti, ritorna l'intero messaggio
+                return lastMessage.length > 30 ? lastMessage.slice(0, 30) + '...' : lastMessage;
+            } 
+            return ''; // Se il contatto non ha messaggi, ritorna una stringa vuota
+        },
+
+        // Metodo per aprire il menù contestuale
+        openContextMenu(event, index) {
+            // Ottiene l'elemento del messaggio corrispondente all'indice
+            const messageElement = this.$refs.messages[index];
+            // Ottiene le coordinate dell'elemento del messaggio
+            const rect = messageElement.getBoundingClientRect();
+            // Imposta le coordinate del menù contestuale in base alle coordinate dell'elemento del messaggio
+            this.contextMenuX = rect.left;
+            this.contextMenuY = rect.bottom;
+            // Imposta l'indice del menù contestuale
+            this.contextMenuIndex = index;
+        },
+
+        deleteMessage(index) {
+            // Elimina il messaggio
+            this.activeContact.messages.splice(index, 1);
+            this.contextMenuIndex = null;
+        },
     },
     // Definisce le proprietà calcolate dell'applicazione
     computed: {
