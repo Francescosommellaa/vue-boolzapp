@@ -11,7 +11,7 @@ const app = createApp({
             contacts: [
                 {
                     name: 'Michele',
-                    avatar: './img/avatar_1.png',
+                    avatar: 'https://th.bing.com/th/id/R.cceee3127152a59ef94d88c33ee8f391?rik=hm2%2f55LBolauWw&pid=ImgRaw&r=0',
                     visible: true,
                     messages: [
                         {
@@ -33,7 +33,7 @@ const app = createApp({
                 },
                 {
                     name: 'Fabio',
-                    avatar: './img/avatar_2.png',
+                    avatar: 'https://th.bing.com/th/id/R.3f86bf9e0dec9c2194a287ecff60d7a0?rik=HjhuxQHVKjKHCw&pid=ImgRaw&r=0',
                     visible: true,
                     messages: [
                         {
@@ -55,7 +55,7 @@ const app = createApp({
                 },
                 {
                     name: 'Samuele',
-                    avatar: './img/avatar_3.png',
+                    avatar: 'https://th.bing.com/th/id/OIP.kURU7OZOlAX_hH-ArdjlOAHaF8?rs=1&pid=ImgDetMain',
                     visible: true,
                     messages: [
                         {
@@ -77,7 +77,7 @@ const app = createApp({
                 },
                 {
                     name: 'Alessandro B.',
-                    avatar: './img/avatar_4.png',
+                    avatar: 'https://th.bing.com/th/id/OIP.yuLCSBvNLn35aA-Qec9TUwAAAA?w=450&h=562&rs=1&pid=ImgDetMain',
                     visible: true,
                     messages: [
                         {
@@ -94,7 +94,7 @@ const app = createApp({
                 },
                 {
                     name: 'Alessandro L.',
-                    avatar: './img/avatar_5.png',
+                    avatar: 'https://th.bing.com/th/id/OIP.BKFLSSf5ZqKamUPcH_P4ogHaFj?rs=1&pid=ImgDetMain',
                     visible: true,
                     messages: [
                         {
@@ -111,7 +111,7 @@ const app = createApp({
                 },
                 {
                     name: 'Claudia',
-                    avatar: './img/avatar_6.png',
+                    avatar: 'https://www.chedonna.it/wp-content/uploads/2019/07/test-viso.jpg',
                     visible: true,
                     messages: [
                         {
@@ -133,7 +133,7 @@ const app = createApp({
                 },
                 {
                     name: 'Federico',
-                    avatar: './img/avatar_7.png',
+                    avatar: 'https://th.bing.com/th/id/OIP.Z7LE3lUIU9nCrdctnN4X1wAAAA?w=453&h=340&rs=1&pid=ImgDetMain',
                     visible: true,
                     messages: [
                         {
@@ -150,7 +150,7 @@ const app = createApp({
                 },
                 {
                     name: 'Davide',
-                    avatar: './img/avatar_8.png',
+                    avatar: 'https://i.pinimg.com/originals/ab/46/4f/ab464f213320700b09b597f45bea6f05.jpg',
                     visible: true,
                     messages: [
                         {
@@ -173,11 +173,18 @@ const app = createApp({
             ],
             searchQuery: '',
             activeContact: null,
+            previewMessage: null
         };
     },
 
     // Definisce i metodi dell'applicazione
     methods: {
+
+        // Metodo per impostare un contatto come attivo
+        setActiveContact(contact) {
+            this.activeContact = contact;
+        },
+
         // Metodo per inviare un messaggio
         sendMessage() {
             if (this.activeContact) {
@@ -195,7 +202,15 @@ const app = createApp({
                   });
                 }, 1000);
             }
-        }
+        },
+
+        getPreviewMessage(contact) {
+            if (contact.messages.length > 0) {
+              const lastMessage = contact.messages[contact.messages.length - 1].message;
+              return lastMessage.length > 30 ? lastMessage.slice(0, 30) + '...' : lastMessage;
+            }
+            return '';
+          }
     },
     // Definisce le proprietà calcolate dell'applicazione
     computed: {
