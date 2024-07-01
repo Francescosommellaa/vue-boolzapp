@@ -10,11 +10,11 @@
     <!-- fontawesome -->
     <script src="https://kit.fontawesome.com/32508bc627.js" crossorigin="anonymous"></script>
 
-    <!-- css -->
-    <link rel="stylesheet" href="css/style.css" />
-
     <!-- vue -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <!-- css -->
+    <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
     
@@ -46,7 +46,12 @@
             </div>
 
             <div class="chat-c">
+                <input v-model="searchQuery" placeholder="Cerca">
 
+                <div v-for="contact in contacts" :key="contact.name">
+                    <img :src="contact.avatar" alt="Avatar">
+                    <h4>{{ contact.name }}</h4>
+                </div>
             </div>
         </div>
          
@@ -56,10 +61,12 @@
 
             </div>
             <div class="chat">
-
+                <div v-for="message in activeContact.messages" :key="message.date" :class="message.status">
+                    <p>{{ message.message }}</p>
+                </div>
             </div>
             <div class="text-c">
-
+                <input v-model="newMessage" @keyup.enter="sendMessage">
             </div>
         </div>
 
