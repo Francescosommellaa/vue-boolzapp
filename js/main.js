@@ -2,7 +2,7 @@
 const { createApp } = Vue
 
 // Crea una nuova applicazione Vue
-createApp({
+const app = createApp({
 
     // Definisce i dati dell'applicazione
     data() {
@@ -201,4 +201,3 @@ createApp({
         }
     }
 }); app.mount('#app');
-
