@@ -171,6 +171,7 @@ const app = createApp({
                     ],
                 }
             ],
+            newMessage: '',
             searchQuery: '',
             activeContact: null,
             previewMessage: null,
@@ -179,17 +180,25 @@ const app = createApp({
             contextMenuIndex: null,
         };
     },
-
     // Definisce i metodi dell'applicazione
     methods: {
+
+        // Metodo per ottenere l'ultimo accesso
+        getLastAccess(contact) {
+            if (contact.messages.length > 0) {
+              return contact.messages[contact.messages.length - 1].date;
+            }
+            return 'Nessun accesso recente';
+        },
 
         // Metodo per impostare un contatto come attivo
         setActiveContact(contact) {
             this.activeContact = contact;
         },
 
-        // Metodo per inviare un messaggio
         sendMessage() {
+        if (this.newMessage.length > 0) {
+            // Metodo per inviare un messaggio
             if (this.activeContact) {
                 this.activeContact.messages.push({
                     date: new Date().toISOString(), // Imposta la data e l'ora attuali
@@ -204,6 +213,9 @@ const app = createApp({
                     status: 'received' // Imposta lo stato del messaggio come "ricevuto"
                   });
                 }, 1000);
+            }
+            console.log(this.newMessage);
+            this.newMessage = '';
             }
         },
 
@@ -234,12 +246,16 @@ const app = createApp({
             // Imposta l'indice del menù contestuale
             this.contextMenuIndex = index;
         },
+        // Metodo per chiudere il menù contestuale
+        closeContextMenu() {
+            this.contextMenuIndex = null;
+        },
 
         deleteMessage(index) {
             // Elimina il messaggio
             this.activeContact.messages.splice(index, 1);
             this.contextMenuIndex = null;
-        },
+        }
     },
     // Definisce le proprietà calcolate dell'applicazione
     computed: {
