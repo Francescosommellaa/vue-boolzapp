@@ -46,13 +46,26 @@ body {
     /* parte sinistra zona immutabile */
 .c-zone {
     width: 100%;
-    height: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 0.8em;
+    padding: 0.5em 0.8em;
     background-color: #eaeaea;
 
+}
+
+.top-page {
+    height: 60px;
+}
+
+.ic-notifica {
+    background-color: white;
+    padding: 0.8em;
+    border-radius: 50%;
+}
+
+.fa-bell-slash {
+    color: #8EDAFC;
 }
 
 .ic-gray {
@@ -67,6 +80,7 @@ body {
 
 .not-option {
     background-color: #8EDAFC;
+    padding: 0.8em 1em;
 }
 
 .cerchio {
@@ -94,14 +108,16 @@ body {
 }
 
 .src-but {
+    width: 80px;
+    height: 40px;
     border: none;
     background-color: #fff;
-    padding: 0.4em 1em;
     border-right: 1px solid black;
     border-radius: 4px 0 0 4px;
 }
 
 .search-input {
+    height: 40px;
     width: 100%;
     box-shadow: none;
     border: none;

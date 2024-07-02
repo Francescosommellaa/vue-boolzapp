@@ -26,7 +26,7 @@
         <!-- parte sinistra container  -->
         <div class="left-c">
 
-            <div class="c-zone">
+            <div class="c-zone top-page">
                 <!-- profilo e nome -->
                 <div class="flex-item">
                     <img class="cerchio" src="https://th.bing.com/th/id/R.c11b6f38dffc24a4508217513b0e50bd?rik=Pt%2bkITlukiMkWg&riu=http%3a%2f%2fwww.emmegi.co.uk%2fwp-content%2fuploads%2f2019%2f01%2fUser-Icon.jpg&ehk=zjS04fF4nxx%2bpkvRPsSezyic3Z7Yfu%2fuoT75KnbNv1Y%3d&risl=&pid=ImgRaw&r=0" alt="profilo">
@@ -40,7 +40,17 @@
             </div>
 
             <div class="c-zone not-option">
-
+                <div class="flex-item">
+                    <div class="ic-notifica">
+                        <i class="fa-solid fa-bell-slash"></i>
+                    </div>
+                    <div>
+                        <h4>Ricevui notifiche di nuovi messaggi</h4>
+                        <span>
+                            <a href="#">Attiva notifiche desktop</a>
+                        </span>
+                    </div>
+                </div>
             </div>
 
             <div class="chat-c">
@@ -57,7 +67,7 @@
                         <img class="cerchio" :src="contact.avatar" alt="Avatar">
                         <div>
                             <h4>{{ contact.name }}</h4>
-                            <p class="last-message">{{getPreviewMessage(contact)}}</p>
+                            <span class="last-message">{{getPreviewMessage(contact)}}</span>
                         </div>
                     </div>
                 </div>
@@ -66,12 +76,12 @@
          
         <!-- parte destra container  -->
         <div class="right-c">
-            <div class="user-chat c-zone" v-if="activeContact != null">
+            <div class="user-chat c-zone top-page" v-if="activeContact != null">
                 <div class="flex-item">
                     <img class="cerchio" :src="activeContact.avatar" alt="Avatar">
                     <div>
                         <h3>{{ activeContact.name }}</h3>
-                        <p>Ultimo accesso: {{ getLastAccess(activeContact) }}</p>
+                        <span>Ultimo accesso: {{ getLastAccess(activeContact) }}</span>
                     </div>
                 </div>
                 <div class="flex-item">
