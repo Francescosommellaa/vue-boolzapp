@@ -21,7 +21,7 @@
     </div>
 
     <!-- container app -->
-     <div id="app" class="container">
+    <div id="app" class="container">
 
         <!-- parte sinistra container  -->
         <div class="left-c">
@@ -33,9 +33,9 @@
                     <h4>Francesco</h4>
                 </div>
                 <div class="flex-item">
-                    <i class="fa-regular fa-circle"></i>
-                    <i class="fa-regular fa-message"></i>
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                    <i class="ic-gray fa-regular fa-circle"></i>
+                    <i class="ic-gray fa-regular fa-message"></i>
+                    <i class="ic-gray fa-solid fa-ellipsis-vertical"></i>
                 </div>
             </div>
 
@@ -46,6 +46,7 @@
             <div class="chat-c">
 
                 <div class="input-container">
+                    <button class="src-but"><i class="fa-solid fa-magnifying-glass"></i></button>
                     <!-- input per la ricerca -->
                     <input class="search-input" v-model="searchQuery" placeholder="Cerca">
                 </div>
@@ -65,27 +66,54 @@
          
         <!-- parte destra container  -->
         <div class="right-c">
-            <div class="user-chat">
-                <!--Profilo Chat attiva  -->
+            <div class="user-chat c-zone" v-if="activeContact != null">
+                <div class="flex-item">
+                    <img class="cerchio" :src="activeContact.avatar" alt="Avatar">
+                    <div>
+                        <h3>{{ activeContact.name }}</h3>
+                        <p>Ultimo accesso: {{ getLastAccess(activeContact) }}</p>
+                    </div>
+                </div>
+                <div class="flex-item">
+                    <i class="ic-gray fa-regular fa-circle"></i>
+                    <i class="ic-gray fa-solid fa-paperclip"></i>
+                    <i class="ic-gray fa-solid fa-ellipsis-vertical"></i>
+                </div>
             </div>
 
             <!-- chat -->
             <div class="chat" v-if="activeContact != null">
                 <div v-for="(message, index) in activeContact.messages" :key="message.date" :class="['message', message.status]" @click="openContextMenu($event, index)" ref="messages">
                     <p>{{ message.message }}</p>
-                    <div class="context-menu" :class="{ active: contextMenuIndex === index }" :style="{ top: contextMenuY + 'px', left: contextMenuX + 'px' }">
-                      <ul>
-                        <li @click="showInfo(index)">Info</li>
-                        <li @click="deleteMessage(index)">Cancella</li>
-                      </ul>
+                    <div class="context-menu" :class="{ active: contextMenuIndex === index }">
+                        <ul>
+                            <li @click="closeContextMenu()">close</li>
+                            <li @click="showInfo(index)">Info</li>
+                            <li @click="deleteMessage(index)">Cancella</li>
+                        </ul>
                     </div>
                 </div>
             </div>
 
 
             <div class="text-c" v-if="activeContact != null">
+                <!-- emoji -->
+                <div>
+                    <i class="ic-clickable fa-regular fa-face-smile"></i>
+                </div>
+
                 <!-- input per i messaggi -->
-                <input v-model="newMessage" @keyup.enter="sendMessage">
+                <input class="in-text" v-model="newMessage" @keyup.enter="sendMessage" placeholder="Scrivi un messaggio"> 
+
+                <!-- icona microfono -->
+                <div v-if="newMessage.length === 0">
+                    <i class="ic-clickable fa-solid fa-microphone"></i>
+                </div>
+
+                <!-- icona send -->
+                <div v-else @click="sendMessage">
+                    <i class="ic-clickable fa-solid fa-paper-plane"></i>
+                </div>
             </div>
         </div>
 
