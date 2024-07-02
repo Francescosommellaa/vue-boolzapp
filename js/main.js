@@ -259,9 +259,8 @@ const app = createApp({
     },
     // Definisce le proprietà calcolate dell'applicazione
     computed: {
-        // Proprietà calcolata per ottenere i contatti filtrati in base alla query di ricerca
+    // Restituisce i contatti che corrispondono alla query di ricerca
         filteredContacts() {
-            // Filtra l'array di contatti per includere solo quelli il cui nome contiene la query di ricerca
             return this.contacts.filter(contact => contact.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
         }
     }
