@@ -183,7 +183,7 @@ const app = createApp({
     // Definisce i metodi dell'applicazione
     methods: {
 
-        // Metodo per ottenere l'ultimo accesso
+        // Restituisce la data dell'ultimo messaggio inviato o ricevuto da un contatto
         getLastAccess(contact) {
             if (contact.messages.length > 0) {
               return contact.messages[contact.messages.length - 1].date;
@@ -191,15 +191,16 @@ const app = createApp({
             return 'Nessun accesso recente';
         },
 
-        // Metodo per impostare un contatto come attivo
+        // Imposta un contatto come attivo per la chat
         setActiveContact(contact) {
             this.activeContact = contact;
         },
 
+        // Invia un nuovo messaggio al contatto attivo
         sendMessage() {
         if (this.newMessage.length > 0) {
-            // Metodo per inviare un messaggio
             if (this.activeContact) {
+                // Aggiunge il nuovo messaggio alla lista dei messaggi del contatto attivo
                 this.activeContact.messages.push({
                     date: new Date().toISOString(), // Imposta la data e l'ora attuali
                     message: this.newMessage, // Usa il testo del nuovo messaggio
@@ -219,7 +220,7 @@ const app = createApp({
             }
         },
 
-        // Metodo per ottenere l'anteprima del messaggio
+        // Restituisce un'anteprima del messaggio più recente di un contatto
         getPreviewMessage(contact) {
             // Controlla se il contatto ha dei messaggi
             if (contact.messages.length > 0) {
@@ -234,7 +235,7 @@ const app = createApp({
             return ''; // Se il contatto non ha messaggi, ritorna una stringa vuota
         },
 
-        // Metodo per aprire il menù contestuale
+        // Apre il menu contestuale per un messaggio
         openContextMenu(event, index) {
             // Ottiene l'elemento del messaggio corrispondente all'indice
             const messageElement = this.$refs.messages[index];
@@ -246,13 +247,14 @@ const app = createApp({
             // Imposta l'indice del menù contestuale
             this.contextMenuIndex = index;
         },
-        // Metodo per chiudere il menù contestuale
+
+        // Chiude il menu contestuale
         closeContextMenu() {
             this.contextMenuIndex = null;
         },
 
+        // Elimina un messaggio
         deleteMessage(index) {
-            // Elimina il messaggio
             this.activeContact.messages.splice(index, 1);
             this.contextMenuIndex = null;
         }
