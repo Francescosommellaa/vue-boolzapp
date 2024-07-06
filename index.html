@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,8 +15,9 @@
     <!-- css -->
     <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
-    
+
     <!-- background green -->
     <div id="green-banner">
     </div>
@@ -29,7 +31,9 @@
             <div class="c-zone top-page">
                 <!-- profilo e nome -->
                 <div class="flex-item">
-                    <img class="cerchio" src="https://th.bing.com/th/id/R.c11b6f38dffc24a4508217513b0e50bd?rik=Pt%2bkITlukiMkWg&riu=http%3a%2f%2fwww.emmegi.co.uk%2fwp-content%2fuploads%2f2019%2f01%2fUser-Icon.jpg&ehk=zjS04fF4nxx%2bpkvRPsSezyic3Z7Yfu%2fuoT75KnbNv1Y%3d&risl=&pid=ImgRaw&r=0" alt="profilo">
+                    <img class="cerchio"
+                        src="https://th.bing.com/th/id/R.c11b6f38dffc24a4508217513b0e50bd?rik=Pt%2bkITlukiMkWg&riu=http%3a%2f%2fwww.emmegi.co.uk%2fwp-content%2fuploads%2f2019%2f01%2fUser-Icon.jpg&ehk=zjS04fF4nxx%2bpkvRPsSezyic3Z7Yfu%2fuoT75KnbNv1Y%3d&risl=&pid=ImgRaw&r=0"
+                        alt="profilo">
                     <h4>Francesco</h4>
                 </div>
                 <div class="flex-item">
@@ -62,7 +66,8 @@
                 </div>
 
                 <!-- Contatti -->
-                <div v-for="contact in contacts" :key="contact.name"@click="setActiveContact(contact)" :class="{ 'active-chat': contact === activeContact }">
+                <div v-for="contact in contacts" :key="contact.name" @click="setActiveContact(contact)"
+                    :class="{ 'active-chat': contact === activeContact }">
                     <div class="container-contact">
                         <img class="cerchio" :src="contact.avatar" alt="Avatar">
                         <div>
@@ -73,7 +78,7 @@
                 </div>
             </div>
         </div>
-         
+
         <!-- parte destra container  -->
         <div class="right-c">
             <div class="user-chat c-zone top-page" v-if="activeContact != null">
@@ -93,7 +98,8 @@
 
             <!-- chat -->
             <div class="chat" v-if="activeContact != null">
-                <div v-for="(message, index) in activeContact.messages" :key="message.date" :class="['message', message.status]" @click="openContextMenu($event, index)" ref="messages">
+                <div v-for="(message, index) in activeContact.messages" :key="message.date"
+                    :class="['message', message.status]" @click="openContextMenu($event, index)" ref="messages">
                     <p>{{ message.message }}</p>
                     <div class="context-menu" :class="{ active: contextMenuIndex === index }">
                         <ul>
@@ -113,7 +119,8 @@
                 </div>
 
                 <!-- input per i messaggi -->
-                <input class="in-text" v-model="newMessage" @keyup.enter="sendMessage" placeholder="Scrivi un messaggio"> 
+                <input class="in-text" v-model="newMessage" @keyup.enter="sendMessage"
+                    placeholder="Scrivi un messaggio">
 
                 <!-- icona microfono -->
                 <div v-if="newMessage.length === 0">
@@ -127,7 +134,7 @@
             </div>
         </div>
 
-     </div>
+    </div>
 
 
 
